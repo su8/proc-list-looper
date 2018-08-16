@@ -75,8 +75,8 @@ int main (void) {
         goto err;
       }
       fp2 = NULL;
-
       fprintf(fp, "%s %s\n", entry->d_name, buf);
+      snprintf(buf, 255, "%s", "");
     }
     if (EOF == (fclose(fp))) {
       goto err;
