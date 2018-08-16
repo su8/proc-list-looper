@@ -4,6 +4,15 @@ The program is only useful if your init system is **not** systemd as they have j
 
 By default it will log everything in **/tmp/log** every 1 second or until press ==CTRL + C==
 
+# Usage
+
+```bash
+while true; do
+  list
+  sleep 1
+done
+```
+
 # Installation
 
 ```c
