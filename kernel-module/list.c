@@ -31,13 +31,37 @@ unsigned int quit = 0U;
 struct task_struct *thread;
 
 static int run_it(void *data) {
-  struct task_struct *task = NULL;
+  static char c_arr[1000][1000];
+  static unsigned int i_arr[1000];
+  static unsigned int x = 0U;
+  static unsigned int skip = 0U;
+  static unsigned int idx = 0U;
+
   while (1) {
+    struct task_struct *task = NULL;
     if (1 == quit) {
       break;
     }
     for_each_process(task) {
-      printk("%d %s\n", task->pid, task->comm);
+      if (idx >= 999U) {
+        memset(i_arr, 0, sizeof(i_arr));
+        memset(c_arr, 0, sizeof(c_arr));
+        idx = 0U;
+      }
+      for (x = 0U; x < idx; x++) {
+        if (i_arr[x] == (unsigned int)(task->pid) && 0 == (strcmp(task->comm, c_arr[x]))) {
+          skip = 1;
+          break;
+        }
+      }
+      if (1U != skip) {
+        i_arr[idx] = (unsigned int)task->pid;
+        snprintf(c_arr[idx], 999, "%s", task->comm);
+
+        printk("%d %s\n", task->pid, task->comm);
+        idx++;
+      }
+      skip = 0U;
     }
     ssleep(5);
   }
