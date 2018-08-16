@@ -10,3 +10,23 @@ By default it will log everything in **/tmp/log** every 1 second or until press 
 $ make
 # make install
 ```
+
+You can achieve something similar with python:
+
+```python
+import os
+
+while True:
+    pids=set(os.listdir("/proc"));
+    o=""
+    for x in pids:
+        try:
+            with open("/proc/" + x + "/cmdline", "r") as f:
+                buf = " ".join(f.read().split(chr(0)));
+                print(x + " " + buf);
+        except IOError:
+            pass
+
+```
+
+And use it like this: `python script.py >> /tmp/log`
