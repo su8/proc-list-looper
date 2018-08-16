@@ -20,6 +20,24 @@ $ make
 # make install
 ```
 
+# Kernel module
+
+```bash
+cd module
+make -j4 # 4 cores to use in parallel compilation
+
+# to test the module
+sudo insmod main.ko
+
+# to read it's output
+dmesg
+
+# to stop it
+sudo rmmod main.ko
+```
+
+---
+
 You can achieve something similar with python:
 
 ```python
