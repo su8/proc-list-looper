@@ -70,7 +70,7 @@ int main (void) {
       if (NULL == (fp2 = fopen(fp2_buf, "r"))) {
         goto err;
       }
-      fscanf(fp2, "%s", buf);
+      fscanf(fp2, "%255s", buf);
       if (EOF == (fclose(fp2))) {
         goto err;
       }
