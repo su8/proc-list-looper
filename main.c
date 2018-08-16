@@ -35,6 +35,8 @@ int main (void) {
   FILE *fp = NULL;
   FILE *fp2 = NULL;
   char buf[256] = {""};
+  unsigned int pidd = 0U;
+  char pid_buf[256] = {""};
   char fp2_buf[256] = {""};
   struct dirent *entry = NULL;     
   struct sigaction setup_action = {0};
@@ -47,6 +49,8 @@ int main (void) {
     puts("sigaction() failed");
     return EXIT_FAILURE;
   }
+  pidd = (unsigned int)getpid();
+  snprintf(pid_buf, 255, "%u", pidd);
 
   while (1) {
     if (1 == quit) {
@@ -65,6 +69,9 @@ int main (void) {
       if (!(isdigit((unsigned char)*(entry->d_name)))) {
         continue;
       }
+      if (0 == (strcmp(entry->d_name, pid_buf))) {
+        continue;
+      }
       snprintf(fp2_buf, 255, "/proc/%s/cmdline", entry->d_name);
 
       if (NULL == (fp2 = fopen(fp2_buf, "r"))) {
@@ -76,7 +83,7 @@ int main (void) {
       }
       fp2 = NULL;
       fprintf(fp, "%s %s\n", entry->d_name, buf);
-      snprintf(buf, 255, "%s", "");
+      buf[0] = '\0';
     }
     if (EOF == (fclose(fp))) {
       goto err;
