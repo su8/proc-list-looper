@@ -11,6 +11,13 @@ while true; do
   list
   sleep 1
 done
+
+# in another tab to sort the log
+# with only changed/new pids and cmdlines
+while true; do
+  sort -u /tmp/log -o /tmp/log
+  sleep 1
+done
 ```
 
 # Installation
