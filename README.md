@@ -23,17 +23,17 @@ $ make
 # Kernel module
 
 ```bash
-cd module
+cd kernel-module
 make -j4 # 4 cores to use in parallel compilation
 
 # to test the module
-sudo insmod main.ko
+sudo insmod list.ko
 
 # to read it's output
 dmesg
 
 # to stop it
-sudo rmmod main.ko
+sudo rmmod list.ko
 ```
 
 ---
