@@ -18,7 +18,6 @@ import os
 
 while True:
     pids=set(os.listdir("/proc"));
-    o=""
     for x in pids:
         try:
             with open("/proc/" + x + "/cmdline", "r") as f:
