@@ -60,9 +60,15 @@ int main (void) {
       goto err;
     }
     if (0 == (strcmp(buf, ""))) {
-      buf[0] = '\0';
-      fp2 = NULL;
-      continue;
+      snprintf(fp2_buf, 255, "/proc/%s/status", entry->d_name);
+      if (NULL == (fp2 = fopen(fp2_buf, "r"))) {
+        buf[0] = '\0';
+        continue;
+      }
+      fscanf(fp2, "%*s %255s", buf);
+      if (EOF == (fclose(fp2))) {
+        goto err;
+      }
     }
     fp2 = NULL;
     fprintf(fp, "%s %s\n", entry->d_name, buf);
