@@ -43,7 +43,7 @@ int main (void) {
   if (NULL == (fp = fopen("/tmp/log", "a"))) {
     goto err;
   }
-  while ((entry = readdir (dp))) {
+  while ((entry = readdir(dp))) {
     if (!(isdigit((unsigned char)*(entry->d_name)))) {
       continue;
     }
