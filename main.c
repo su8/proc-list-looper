@@ -59,6 +59,11 @@ int main (void) {
     if (EOF == (fclose(fp2))) {
       goto err;
     }
+    if (0 == (strcmp(buf, ""))) {
+      buf[0] = '\0';
+      fp2 = NULL;
+      continue;
+    }
     fp2 = NULL;
     fprintf(fp, "%s %s\n", entry->d_name, buf);
     buf[0] = '\0';
