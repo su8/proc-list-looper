@@ -59,6 +59,9 @@ for x in pids:
     try:
         with open("/proc/" + x + "/cmdline", "r") as f:
             buf = " ".join(f.read().split(chr(0)));
+            if not buf:
+                with open("/proc/" + x + "/status", "r") as f2:
+                    buf = "".join(f2.read().split()[1]);
             print(x + " " + buf);
     except IOError:
         pass;
