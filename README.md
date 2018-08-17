@@ -10,13 +10,7 @@ By default it will log everything in **/tmp/log** every 1 second or until press 
 while true; do
   list
   sleep 1
-done
-
-# in another tab to sort the log
-# with only changed/new pids and cmdlines
-while true; do
   sort -u /tmp/log -o /tmp/log
-  sleep 1
 done
 ```
 
@@ -48,18 +42,23 @@ sudo rmmod list.ko
 You can achieve something similar with python:
 
 ```python
-import os
+import os;
 
-while True:
-    pids = set(os.listdir("/proc"));
-    for x in pids:
-        try:
-            with open("/proc/" + x + "/cmdline", "r") as f:
-                buf = " ".join(f.read().split(chr(0)));
-                print(x + " " + buf);
-        except IOError:
-            pass
-
+pids = set(os.listdir("/proc"));
+for x in pids:
+    try:
+        with open("/proc/" + x + "/cmdline", "r") as f:
+            buf = " ".join(f.read().split(chr(0)));
+            print(x + " " + buf);
+    except IOError:
+        pass;
 ```
 
-And use it like this: `python script.py >> /tmp/log`
+And use it like this:
+```bash
+while true; do
+  python script.py >> /tmp/log
+  sleep 1
+  sort -u /tmp/log -o /tmp/log
+done
+```

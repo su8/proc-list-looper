@@ -62,6 +62,7 @@ static int run_it(void *data) {
         idx++;
       }
       skip = 0U;
+      schedule();
     }
     ssleep(5);
   }
