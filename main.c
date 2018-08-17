@@ -53,7 +53,7 @@ int main (void) {
     snprintf(fp2_buf, 255, "/proc/%s/cmdline", entry->d_name);
 
     if (NULL == (fp2 = fopen(fp2_buf, "r"))) {
-      goto err;
+      continue;
     }
     fscanf(fp2, "%255s", buf);
     if (EOF == (fclose(fp2))) {
