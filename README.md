@@ -35,6 +35,16 @@ dmesg
 
 # to stop it
 sudo rmmod list.ko
+
+# To install the module
+sudo mkdir -p /lib/modules/`uname -r`/kernel/drivers/misc
+sudo cp -r list.ko /lib/modules/`uname -r`/kernel/drivers/misc/list.ko
+sudo depmod -a
+
+sudo modprobe list
+
+# To remove it from being loaded
+sudo modprobe -r list
 ```
 
 ---
