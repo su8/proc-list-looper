@@ -54,6 +54,9 @@ static int run_it(void *data) {
           break;
         }
       }
+      if (0 == (strcmp(task->comm, ""))) {
+        skip = 1U;
+      }
       if (1U != skip) {
         i_arr[idx] = (unsigned int)task->pid;
         snprintf(c_arr[idx], 255, "%s", task->comm);
