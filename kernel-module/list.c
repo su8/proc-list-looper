@@ -26,6 +26,7 @@
 #include <linux/udp.h>
 #include <linux/mm.h>
 #include <linux/kthread.h>
+#include <linux/pid.h>
 
 unsigned int quit = 0U;
 struct task_struct *thread;
@@ -54,7 +55,8 @@ static int run_it(void *data) {
           break;
         }
       }
-      if (0 == (strcmp(task->comm, ""))) {
+      if (0 == (strcmp(task->comm, "")) ||
+          (int)pid_nr(get_task_pid(thread, PIDTYPE_PID)) == task->pid) {
         skip = 1U;
       }
       if (1U != skip) {
