@@ -22,6 +22,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/param.h>
 #include <sys/sysctl.h>
 #include <sys/user.h>
 #include <kvm.h>
@@ -31,7 +32,7 @@ int main (void) {
   int x = 1;
   int count = 0;
   FILE *fp = NULL;
-  kvm_t *kd = kvm_open(NULL, "/dev/null", NULL, O_RDONLY, "error: ");
+  kvm_t *kd = kvm_open(NULL, NULL, NULL, KVM_NO_FILES, NULL);
 
   if (NULL == kd) {
     return EXIT_FAILURE;
@@ -40,9 +41,9 @@ int main (void) {
     goto err;
   }
 
-  kp = kvm_getprocs(kd, KERN_PROC_PROC, 0, &count);
+  kp = kvm_getprocs(kd, KERN_PROC_ALL, 0, sizeof(*kp), &count);
   for (; x < count; x++) {
-    fprintf(fp, "%d %s\n", kp[x].ki_pid, kp[x].ki_comm);
+    fprintf(fp, "%d %s\n", kp[x].p_pid, kp[x].p_comm);
   }
 
 err:
