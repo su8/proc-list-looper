@@ -42,7 +42,7 @@ int main (void) {
 
   kp = kvm_getprocs(kd, KERN_PROC_PROC, 0, &count);
   for (; x < count; x++) {
-    fprintf(fp, "%d %s",kp[x].ki_pid, kp[x].ki_comm);
+    fprintf(fp, "%d %s\n", kp[x].ki_pid, kp[x].ki_comm);
   }
 
 
