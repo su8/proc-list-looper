@@ -2,8 +2,6 @@ The sole purpose of this program is to log the pid name and cmdline in a loop, s
 
 The program is only useful if your init system is **not** systemd as they have journalctl.
 
-By default it will log everything in **/tmp/log** every 1 second or until press ==CTRL + C==
-
 # Usage
 
 ```bash
@@ -30,7 +28,14 @@ $ make freebsd
 # make install
 ```
 
-# Kernel module
+OpenBSD:
+
+```c
+$ make openbsd
+# make install
+```
+
+# Linux Kernel module
 
 ```bash
 cd kernel-module
