@@ -16,8 +16,17 @@ done
 
 # Installation
 
+linux:
+
 ```c
 $ make
+# make install
+```
+
+FreeBSD:
+
+```c
+$ make freebsd
 # make install
 ```
 
@@ -49,7 +58,7 @@ sudo modprobe -r list
 
 ---
 
-You can achieve something similar with python:
+You can achieve something similar with python under linux:
 
 ```python
 import os;
@@ -68,6 +77,7 @@ for x in pids:
 ```
 
 And use it like this:
+
 ```bash
 while true; do
   python script.py >> /tmp/log

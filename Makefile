@@ -31,4 +31,7 @@ clean:
 uninstall:
 	rm -f /usr/bin/$(PACKAGE)
 
-.PHONY: all install clean uninstall
+freebsd:
+	$(CC) $(CFLAGS) -lkvm -o $(PACKAGE) main2.c
+
+.PHONY: all install clean uninstall freebsd
