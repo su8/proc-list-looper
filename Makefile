@@ -17,10 +17,6 @@
 CFLAGS+=-g2 -Wall -Wextra -O2 -std=c99 -D_DEFAULT_SOURCE -pipe -pedantic -Wundef -Wshadow -W -Wwrite-strings -Wcast-align -Wstrict-overflow=5 -Wconversion -Wpointer-arith -Wstrict-prototypes -Wformat=2 -Wsign-compare -Wendif-labels -Wredundant-decls -Winit-self
 
 PACKAGE=list
-PROG=main-linux.c
-
-all:
-	$(CC) $(CFLAGS) -o $(PACKAGE) $(PROG)
 
 install: 
 	install -D -s -m 755 $(PACKAGE) /usr/bin/$(PACKAGE)
@@ -31,10 +27,16 @@ clean:
 uninstall:
 	rm -f /usr/bin/$(PACKAGE)
 
+linux:
+	$(CC) $(CFLAGS) -o $(PACKAGE) main-linux.c
+
 freebsd:
 	$(CC) $(CFLAGS) -lkvm -o $(PACKAGE) main-freebsd.c
 
 openbsd:
 	$(CC) $(CFLAGS) -lkvm -o $(PACKAGE) main-openbsd.c
 
-.PHONY: all install clean uninstall freebsd openbsd
+netbsd:
+	$(CC) $(CFLAGS) -lkvm -o $(PACKAGE) main-netbsd.c
+
+.PHONY: linux install clean uninstall freebsd openbsd netbsd

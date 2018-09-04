@@ -14,10 +14,10 @@ done
 
 # Installation
 
-linux:
+Linux:
 
 ```c
-$ make
+$ make linux
 # make install
 ```
 
@@ -32,6 +32,13 @@ OpenBSD:
 
 ```c
 $ make openbsd
+# make install
+```
+
+NetBSD:
+
+```c
+$ make netbsd
 # make install
 ```
 
